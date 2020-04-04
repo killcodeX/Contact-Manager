@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Header = (props) =>{
     const {branding} =props;
@@ -8,5 +9,12 @@ const Header = (props) =>{
         </div>
     )
 }
+
+Header.props = {
+    branding: 'My App'
+};
+Header.propTypes = {
+    branding: PropTypes.string.isRequired
+};
 
 export default Header;
