@@ -5,10 +5,15 @@ const Header = (props) =>{
     const {branding} =props;
     return (
         <div>
-            <h1>{branding}</h1>
+            <h1 style={headingStyle}>{branding}</h1>
         </div>
     )
-}
+};
+
+const headingStyle = {
+    color:'green', 
+    fontSize:'50px'
+};
 
 Header.props = {
     branding: 'My App'
