@@ -18,7 +18,7 @@ class Contact extends Component {
 
         return (
             <div className="card card-body mb-3">
-                <h4>{name} <FontAwesomeIcon icon={faSortDown} onClick={this.onShowClick}/></h4>
+                <h4>{name} <FontAwesomeIcon icon={faSortDown} onClick={this.onShowClick} style={{ cursor:'pointer' }}/></h4>
                 {showContactInfo ? ( <ul className="list-group">
                     <li className="list-group-item">Email: {email}</li>
                     <li className="list-group-item">Phone: {phone}</li>
