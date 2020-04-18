@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faSortDown } from '@fortawesome/free-solid-svg-icons';
+import {Consumer} from '../context';
 
 class Contact extends Component {
     state = {
@@ -12,32 +13,38 @@ class Contact extends Component {
         this.setState({showContactInfo : !this.state.showContactInfo });
     }
 
-    onDeleteClick = () => {
-        this.props.deleteClickHandler();
+    onDeleteClick = (id, dispatch) => {
+        dispatch({type: 'Delete_Contact', payload: id});
     }
 
     render() {
-        const {name, email, phone} = this.props.contact;
+        const {id, name, email, phone} = this.props.contact;
         const { showContactInfo } = this.state;
 
         return (
-            <div className="card card-body mb-3">
-                <h4>{name} <FontAwesomeIcon icon={faSortDown} onClick={this.onShowClick} style={{ cursor:'pointer' }}/>
-                <FontAwesomeIcon icon={faTimes} style={{cursor:'pointer', float:'right', color:'red'}}
-                onClick={this.onDeleteClick}/></h4>
-                {showContactInfo ? ( <ul className="list-group">
-                    <li className="list-group-item">Email: {email}</li>
-                    <li className="list-group-item">Phone: {phone}</li>
-                </ul>) : null}
+            <Consumer>
+                {value => {
+                    const { dispatch } = value;
+                    return (
+                        <div className="card card-body mb-3">
+                            <h4>{name} <FontAwesomeIcon icon={faSortDown} onClick={this.onShowClick} style={{ cursor:'pointer' }}/>
+                            <FontAwesomeIcon icon={faTimes} style={{cursor:'pointer', float:'right', color:'red'}}
+                            onClick={this.onDeleteClick.bind(this, id, dispatch)}/></h4>
+                            {showContactInfo ? ( <ul className="list-group">
+                                <li className="list-group-item">Email: {email}</li>
+                                <li className="list-group-item">Phone: {phone}</li>
+                            </ul>) : null}
                 
-            </div>
-        )
+                        </div>
+                    )
+                }}
+            </Consumer>
+        );
     }
 }
 
 Contact.propTypes = {
-    contact:PropTypes.string.isRequired,
-    deleteClickHandler:PropTypes.func.isRequired
+    contact:PropTypes.string.isRequired
 };
 
 export default Contact;
