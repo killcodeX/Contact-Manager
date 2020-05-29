@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Consumer } from '../context';
-import uuid from 'uuid';
+import {v1 as uuid} from 'uuid';
 
 class AddContact extends Component {
 
@@ -14,11 +14,20 @@ class AddContact extends Component {
         e.preventDefault();
         const {name, email, phone} = this.state;
         const newContact = {
-            id:uuid(),
+            id: uuid(),
             name,
             email,
             phone
         }
+
+        dispatch({type: 'ADD_CONTACT', payload: newContact})
+
+        // to clear state
+        this.setState({
+            name : '',
+            email : '',
+            phone : ''
+        })
     }
 
     stateChange = (e) =>{
