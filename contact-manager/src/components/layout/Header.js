@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faPlus, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 const Header = (props) =>{
     const {branding} =props;
@@ -9,7 +12,15 @@ const Header = (props) =>{
                 <a href="/" className="navbar-brand">{branding}</a>
                 <div>
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item"><a href="/" className="nav-link">Home</a></li>
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link"><FontAwesomeIcon icon={faHome}/> Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/contact/add" className="nav-link"><FontAwesomeIcon icon={faPlus}/> Add</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/about" className="nav-link"><FontAwesomeIcon icon={faQuestion}/> About</Link>
+                        </li>
                     </ul>
                 </div>
             </div>
